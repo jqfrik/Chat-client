@@ -1,16 +1,34 @@
+import React from "react";
 import "./App.css";
 import Header from "./Components/Header";
-import Messages from "./Components/Messages";
-import ChatsBlock from "./Components/ChatsBlock";
+import MainPage from "./Pages/MainPage";
+import LoginPage from "./Pages/LoginPage";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 function App() {
+  const [currentUser, setCurrentUser] = React.useState(null)
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false)
+
+  React.useEffect(() => {
+    const token = localStorage.getItem("authToken")
+    if(token !== "" && token !== null){
+      setIsAuthenticated(true)
+    }
+  });
   return (
     <div className="app">
       <Header />
-      <div className="main-content">
-        <ChatsBlock />
-        <Messages />
-      </div>
+      <Router>
+        <Routes>
+          <Route path="" element={isAuthenticated && <MainPage isAuthenticated={isAuthenticated} />} />
+          <Route path="/login" element={!isAuthenticated && <LoginPage setIsAuthenticated={setIsAuthenticated} />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
