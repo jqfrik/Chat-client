@@ -16,7 +16,7 @@ function App() {
 
   React.useEffect(() => {
     const token = localStorage.getItem("authToken")
-    if(token !== "" && token !== null){
+    if (token !== "" && token !== null) {
       setIsAuthenticated(true)
     }
   });
@@ -25,8 +25,8 @@ function App() {
       <Header />
       <Router>
         <Routes>
-          <Route path="" element={isAuthenticated && <MainPage isAuthenticated={isAuthenticated} />} />
-          <Route path="/login" element={!isAuthenticated && <LoginPage setIsAuthenticated={setIsAuthenticated} />} />
+          <Route path="" element={ isAuthenticated ? <MainPage isAuthenticated={isAuthenticated} /> : <Navigate replace to="/login" /> } />
+          <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
         </Routes>
       </Router>
     </div>

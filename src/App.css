@@ -100,3 +100,14 @@ button {
     cursor: pointer;
     background-color: white;
 }
+.friend-item {
+    display: flex;
+    align-items: center;
+    border:1px solid #8a67c0;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.friend-item p {
+    font-size: 18px;
+}
