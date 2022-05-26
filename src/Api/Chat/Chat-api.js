@@ -31,3 +31,10 @@ export async function createChat(currentUserId, friendUserId, authToken) {
     authToken
   );
 }
+
+// export async function getChatById(chatId,authToken){
+//   let payload = {
+//     chatId
+//   }
+//   return await fetchWrapper("/Chat/ChatInfo",)
+// }

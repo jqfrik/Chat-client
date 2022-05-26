@@ -2,9 +2,7 @@ import React from "react"
 
 function FriendItem(props) {
     const onClickUser = async (e) => {
-        let createChatResult = await props.createChat()
-        debugger
-        let res = 0
+        await props.createChat()
     }
     return (
         <div className="friend-item" onMouseDown={onClickUser}>

@@ -36,8 +36,14 @@ function ChatsBlock() {
   }
 
   const onCreateChat = async (friendUserId) => {
-    
-    return await createChat(localStorage.getItem("userId"),friendUserId,localStorage.getItem("authToken"))
+    let createChatResult = createChat(localStorage.getItem("userId"),friendUserId,localStorage.getItem("authToken"))
+    if(createChatResult.data){
+      let chatId = createChatResult.data
+
+      setChats(chats => [...chats, newChat])
+    }else{
+        //Не смог создать чат
+    }
   }
 
   return (
