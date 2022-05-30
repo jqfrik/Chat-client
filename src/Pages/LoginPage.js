@@ -24,6 +24,7 @@ function LoginPage(props) {
             props.setIsAuthenticated(true)
             history("/")
         }
+        history("/")
     }
 
     return (

@@ -14,6 +14,7 @@ export async function fetchWrapper(
         Authorization: "Bearer " + authToken,
       },
     };
+    debugger
     if (payload && method?.toLowerCase() != "get") {
       bodyWrapper.body = JSON.stringify(payload);
     }

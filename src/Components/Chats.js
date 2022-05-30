@@ -1,14 +1,13 @@
 import React from "react";
 import ChatItem from "./ChatItem";
 
-function Chats() {
+function Chats(props) {
   return (
     <div className="chats">
-      <ChatItem photoUrl={"photoUrl"} name={"Арчаков Дэннис"} statusActive={true} lastMessage={"Какого быть разработчиком высокого уровня"}/>
-      <ChatItem photoUrl={"photoUrl"} name={"Арчаков Дэннис"} statusActive={true} lastMessage={"Какого быть разработчиком высокого уровня"}/>
-      <ChatItem photoUrl={"photoUrl"} name={"Арчаков Дэннис"} statusActive={true} lastMessage={"Какого быть разработчиком высокого уровня"}/>
-      <ChatItem photoUrl={"photoUrl"} name={"Арчаков Дэннис"} statusActive={true} lastMessage={"Какого быть разработчиком высокого уровня"}/>
-      <ChatItem photoUrl={"photoUrl"} name={"Арчаков Дэннис"} statusActive={true} lastMessage={"Какого быть разработчиком высокого уровня"}/>
+      {
+        props.chats.map(chat => <ChatItem photoUrl={chat.photoUrl} name={chat.title} statusActive={true} lastMessage={chat.messages[0] || "Нет сообщений"}/>)
+      }
+      
     </div>
   );
 }

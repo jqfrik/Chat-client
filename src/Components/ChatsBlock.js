@@ -2,7 +2,7 @@ import React from "react";
 import Chats from "./Chats"
 import FriendItem from "./FriendItem";
 import { getAllUsersBySearchString } from "../Api/User/User-api"
-import { createChat } from "../Api/Chat/Chat-api"
+import { createChat, getChatById } from "../Api/Chat/Chat-api"
 
 function ChatsBlock() {
   const [friendsSearchString, setFriendsSearchString] = React.useState('')
@@ -11,6 +11,9 @@ function ChatsBlock() {
   const [chats, setChats] = React.useState([])
   const friendsLimit = 10
   let typingMessage = false
+
+  window.chats = chats
+  window.friends = friends
 
   const onChangeFindFriends = async (e) => {
     if(typingMessage){
@@ -36,11 +39,16 @@ function ChatsBlock() {
   }
 
   const onCreateChat = async (friendUserId) => {
-    let createChatResult = createChat(localStorage.getItem("userId"),friendUserId,localStorage.getItem("authToken"))
+    const authToken = localStorage.getItem("authToken")
+    let createChatResult = await createChat(localStorage.getItem("userId"), friendUserId, authToken)
+    debugger
     if(createChatResult.data){
       let chatId = createChatResult.data
-
-      setChats(chats => [...chats, newChat])
+      const currentChatResponse = await getChatById(chatId,authToken)
+      if(currentChatResponse.data){
+        setChats(chats => [...chats, currentChatResponse.data])
+      }
+      console.log("Не смог получить информацию по чату")
     }else{
         //Не смог создать чат
     }
@@ -56,7 +64,7 @@ function ChatsBlock() {
           }
         </div>
       </div>
-      <Chats />
+      <Chats chats={chats}/>
     </div>
   )
 }

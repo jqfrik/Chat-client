@@ -32,9 +32,6 @@ export async function createChat(currentUserId, friendUserId, authToken) {
   );
 }
 
-// export async function getChatById(chatId,authToken){
-//   let payload = {
-//     chatId
-//   }
-//   return await fetchWrapper("/Chat/ChatInfo",)
-// }
+export async function getChatById(chatId,authToken){
+  return await fetchWrapper(`/Chat/GetChatById/${chatId}`,"GET",null,"application/json",authToken)
+}
