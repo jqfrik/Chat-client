@@ -9,6 +9,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import base64 from "base64-js"
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState(null)
@@ -20,6 +21,8 @@ function App() {
       setIsAuthenticated(true)
     }
   });
+  window.allonah = base64
+  
   return (
     <div className="app">
       <Header />

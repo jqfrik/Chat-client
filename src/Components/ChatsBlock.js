@@ -24,7 +24,8 @@ function ChatsBlock() {
     const userId = localStorage.getItem("userId")
     const authToken = localStorage.getItem("authToken")
     if (userId && authToken) {
-      const friendsResult = await getAllUsersBySearchString(userId, friendsSearchString, authToken)
+      const friendsResultResponse = await getAllUsersBySearchString(userId, friendsSearchString, authToken)
+      let friendsResult = await friendsResultResponse.json()
       setFriends(friendsResult)
     }
     typingMessage = false
@@ -40,12 +41,13 @@ function ChatsBlock() {
 
   const onCreateChat = async (friendUserId) => {
     const authToken = localStorage.getItem("authToken")
-    let createChatResult = await createChat(localStorage.getItem("userId"), friendUserId, authToken)
-    debugger
+    let createChatResponse = await createChat(localStorage.getItem("userId"), friendUserId, authToken)
+    let createChatResult =  await createChatResponse.json()
     if(createChatResult.data){
       let chatId = createChatResult.data
       const currentChatResponse = await getChatById(chatId,authToken)
-      if(currentChatResponse.data){
+      let currentChatResult = await currentChatResponse.json()
+      if(currentChatResult.data){
         setChats(chats => [...chats, currentChatResponse.data])
       }
       console.log("Не смог получить информацию по чату")

@@ -14,12 +14,10 @@ export async function fetchWrapper(
         Authorization: "Bearer " + authToken,
       },
     };
-    debugger
     if (payload && method?.toLowerCase() != "get") {
       bodyWrapper.body = JSON.stringify(payload);
     }
   
     let response = await fetch(BASE_URL + url, bodyWrapper);
-    let json = await response.json();
-    return json;
+    return response;
   }
